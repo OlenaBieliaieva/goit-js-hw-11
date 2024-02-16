@@ -22,11 +22,15 @@ function onSearchBtn(event) {
   images.innerHTML = '';
   loader.style.display = 'block';
 
-  if (searchInputElem.value === '') {
-    return alert`Please fill in the form`;
+  if (searchInputElem.value.trim() === '') {
+    iziToast.error({
+      position: 'topRight',
+      message: 'Please fill in the form',
+      messageColor: 'white',
+    });
   }
 
-  const inputValue = event.target.elements.search.value;
+  const inputValue = searchInputElem.value;
 
   getPictures(inputValue)
     .then(data => {
@@ -41,7 +45,7 @@ function onSearchBtn(event) {
         });
       }
 
-      images.innerHTML = ('beforeend', createMarkup(data.hits));
+      images.insertAdjacentHTML('beforeend', createMarkup(data.hits));
 
       const refreshPage = new SimpleLightbox('.gallery a', {
         captions: true,
