@@ -107,7 +107,6 @@ ol {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
-
 .thumb-block {
   display: flex;
   gap: 8px;
@@ -121,7 +120,6 @@ ol {
   text-align: center;
   margin: 0;
 }
-
 .tittle {
   color: #212127;
   font-family: Montserrat;
@@ -131,7 +129,6 @@ ol {
   letter-spacing: 0.04em;
   margin: 0;
 }
-
 .amount {
   color: #212127;
   font-family: Montserrat;
