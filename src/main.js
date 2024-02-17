@@ -12,6 +12,12 @@ const searchInputElem = document.querySelector('.input-search');
 const images = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
+const refreshPage = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 loader.style.display = 'none';
 
 searchFormElem.addEventListener('submit', onSearchBtn);
@@ -20,17 +26,18 @@ function onSearchBtn(event) {
   event.preventDefault();
 
   images.innerHTML = '';
-  loader.style.display = 'block';
 
-  if (searchInputElem.value.trim() === '') {
-    iziToast.error({
+  const inputValue = searchInputElem.value;
+
+  if (inputValue.trim() === '') {
+    return iziToast.error({
       position: 'topRight',
       message: 'Please fill in the form',
       messageColor: 'white',
     });
   }
 
-  const inputValue = searchInputElem.value;
+  loader.style.display = 'block';
 
   getPictures(inputValue)
     .then(data => {
@@ -47,11 +54,6 @@ function onSearchBtn(event) {
 
       images.insertAdjacentHTML('beforeend', createMarkup(data.hits));
 
-      const refreshPage = new SimpleLightbox('.gallery a', {
-        captions: true,
-        captionsData: 'alt',
-        captionDelay: 250,
-      });
       refreshPage.refresh();
 
       searchFormElem.reset();
